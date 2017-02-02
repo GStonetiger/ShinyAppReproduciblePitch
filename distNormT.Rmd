@@ -1,0 +1,99 @@
+---
+title: "Normal vs T Distribution"
+author: "Rick"
+date: "February 2, 2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Normal vs T Distribution
+The t distribution, invented by William Gosset in 1908, has thicker tails than the normal. Also, instead of having two parameters, mean and variance, as the normal does, the t distribution has only one - the number of degrees of freedom (df). 
+
+As df increases, the t distribution gets more like a standard normal, so it's centered around 0. Also, the t assumes that the underlying data are iid Gaussian so the statistic (X' - mu)/(s/sqrt(n)) has n-1 degrees of freedom. 
+
+## R Code - myplot
+```{r echo = TRUE, eval = FALSE}
+library(ggplot2)
+k <- 1000
+xvals <- seq(-5, 5, length = k)
+myplot <- function(df){
+  d <- data.frame(y = c(dnorm(xvals), dt(xvals, df)),
+                  x = xvals,
+                  dist = factor(rep(c("Normal", "T"), c(k,k))))
+  g <- ggplot(d, aes(x = x, y = y)) 
+  g <- g + geom_line(size = 2, aes(colour = dist))
+  g <- g + ggtitle(paste("df=", df, ", dnorm(0) - dt(0, df)="
+                         , round(dnorm(0) - dt(0, df), 3)))
+  print(g)
+}
+myplot(3)
+myplot(20)
+```
+https://github.com/swirldev/swirl_courses/blob/master/Statistical_Inference/T_Confidence_Intervals/tPlot.R
+
+
+## Density Plots
+```{r fig.height=3}
+library(ggplot2)
+k <- 1000
+xvals <- seq(-5, 5, length = k)
+myplot <- function(df){
+  d <- data.frame(y = c(dnorm(xvals), dt(xvals, df)),
+                  x = xvals,
+                  dist = factor(rep(c("Normal", "T"), c(k,k))))
+  g <- ggplot(d, aes(x = x, y = y)) 
+  g <- g + geom_line(size = 2, aes(colour = dist))
+  g <- g + ggtitle(paste("df=", df, ", dnorm(0) - dt(0, df)="
+                         , round(dnorm(0) - dt(0, df), 3)))
+  print(g)
+}
+myplot(3)
+myplot(20)
+```
+
+
+## R Code - myplot2
+```{r echo = TRUE, eval = FALSE}
+library(ggplot2)
+pvals <- seq(.5, .99, by = .01)
+myplot2 <- function(df){
+  d <- data.frame(n= qnorm(pvals),t=qt(pvals, df),
+                  p = pvals)
+  g <- ggplot(d, aes(x= n, y = t))
+  g <- g + geom_abline(size = 2, col = "lightblue")
+  g <- g + geom_line(size = 2, col = "black")
+  g <- g + geom_vline(xintercept = qnorm(0.975))
+  g <- g + geom_hline(yintercept = qt(0.975, df))
+  g <- g + ggtitle(paste("df=", df, ", qt(0.975, df) - qnorm(0.975)="
+                         , round(qt(0.975, df) - qnorm(0.975), 3)))
+  print(g)
+}
+myplot2(3)
+myplot2(20)
+```
+
+https://github.com/swirldev/swirl_courses/blob/master/Statistical_Inference/T_Confidence_Intervals/tQuant.R
+
+## Quantile Plots
+```{r fig.height=3}
+library(ggplot2)
+pvals <- seq(.5, .99, by = .01)
+myplot2 <- function(df){
+  d <- data.frame(n= qnorm(pvals),t=qt(pvals, df),
+                  p = pvals)
+  g <- ggplot(d, aes(x= n, y = t))
+  g <- g + geom_abline(size = 2, col = "lightblue")
+  g <- g + geom_line(size = 2, col = "black")
+  g <- g + geom_vline(xintercept = qnorm(0.975))
+  g <- g + geom_hline(yintercept = qt(0.975, df))
+  g <- g + ggtitle(paste("df=", df, ", qt(0.975, df) - qnorm(0.975)="
+                         , round(qt(0.975, df) - qnorm(0.975), 3)))
+  print(g)
+}
+myplot2(3)
+myplot2(20)
+```
+
