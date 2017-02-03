@@ -1,5 +1,5 @@
 ---
-title: "Normal vs T Distribution"
+title: "t vs Z Distribution"
 author: "Rick"
 date: "February 2, 2017"
 output: slidy_presentation
@@ -9,12 +9,12 @@ output: slidy_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Normal vs T Distribution
+## t vs Z Distribution
 The t distribution, invented by William Gosset in 1908, has thicker tails than the normal. Also, instead of having two parameters, mean and variance, as the normal does, the t distribution has only one - the number of degrees of freedom (df). 
 
 As df increases, the t distribution gets more like a standard normal, so it's centered around 0. Also, the t assumes that the underlying data are iid Gaussian so the statistic (X' - mu)/(s/sqrt(n)) has n-1 degrees of freedom. 
 
-## R Code - myplot
+## R code for investigating t and Z densities
 ```{r echo = TRUE, eval = FALSE}
 library(ggplot2)
 k <- 1000
@@ -35,7 +35,7 @@ myplot(20)
 https://github.com/swirldev/swirl_courses/blob/master/Statistical_Inference/T_Confidence_Intervals/tPlot.R
 
 
-## Density Plots
+## Plots for investigating t and Z densities
 ```{r fig.height=3}
 library(ggplot2)
 k <- 1000
@@ -55,7 +55,7 @@ myplot(20)
 ```
 
 
-## R Code - myplot2
+## R code for investigating the upper quantiles of the t and Z densities
 ```{r echo = TRUE, eval = FALSE}
 library(ggplot2)
 pvals <- seq(.5, .99, by = .01)
@@ -77,7 +77,7 @@ myplot2(20)
 
 https://github.com/swirldev/swirl_courses/blob/master/Statistical_Inference/T_Confidence_Intervals/tQuant.R
 
-## Quantile Plots
+## Plots for investigating the upper quantiles of the t and Z densities
 ```{r fig.height=3}
 library(ggplot2)
 pvals <- seq(.5, .99, by = .01)
