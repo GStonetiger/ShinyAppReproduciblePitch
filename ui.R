@@ -13,7 +13,7 @@ shinyUI(fluidPage(
         label = "degree of freedom (df)",
         min = 1,
         max = 50,
-        value = 3
+        value = 1
       )
     ),
     mainPanel(plotOutput("ddistPlot"),

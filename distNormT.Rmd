@@ -14,6 +14,9 @@ The t distribution, invented by William Gosset in 1908, has thicker tails than t
 
 As df increases, the t distribution gets more like a standard normal, so it's centered around 0. Also, the t assumes that the underlying data are iid Gaussian so the statistic (X' - mu)/(s/sqrt(n)) has n-1 degrees of freedom. 
 
+You can see these statements in action here.
+https://gstonetiger.shinyapps.io/Document/
+
 ## R code for investigating t and Z densities
 ```{r echo = TRUE, eval = FALSE}
 library(ggplot2)
